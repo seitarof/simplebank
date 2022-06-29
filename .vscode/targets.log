@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Fri Jun 24 00:23:05 2022
+# Make data base, printed on Fri Jun 24 19:53:51 2022
 
 # Variables
 
@@ -45,7 +45,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 INFOPATH = /opt/homebrew/share/info:
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/ff/26_f5xk16bg22vvrf6j00bf00000gn/T/vscode-ipc-f67df425-78c7-493b-8a98-9b0432eb18c5.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/ff/26_f5xk16bg22vvrf6j00bf00000gn/T/vscode-ipc-51c8b0a0-544c-4a12-8865-7d2b19fca5e7.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -55,13 +55,15 @@ PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sb
 # environment
 GOPATH = /Users/seitaro/go
 # environment
+LaunchInstanceID = B1B0F6E5-BF78-4A45-950E-4C9E3F2AC5CC
+# environment
 VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.BhgTp2BmUr/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.3tq6PzqUs5/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -142,6 +144,8 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186b3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -153,9 +157,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 62804
+VSCODE_PID = 582
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=2/94=2%
+# Load=72/1024=7%, Rehash=0, Collisions=2/96=2%
 
 # Pattern-specific Variable Values
 
@@ -163,9 +167,9 @@ VSCODE_PID = 62804
 
 # Directories
 
-# . (device 16777232, inode 15753083): 9 files, no impossibilities.
+# . (device 16777232, inode 15753083): 10 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 10 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -214,6 +218,7 @@ sqlc:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-06-21 21:54:40
 #  File has been updated.
 #  Successfully updated.
@@ -284,6 +289,6 @@ migratedown:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jun 24 00:23:05 2022
+# Finished Make data base on Fri Jun 24 19:53:51 2022
 
  
