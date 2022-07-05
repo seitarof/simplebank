@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Fri Jun 24 19:53:51 2022
+# Make data base, printed on Tue Jul  5 21:33:08 2022
 
 # Variables
 
@@ -45,7 +45,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 INFOPATH = /opt/homebrew/share/info:
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/ff/26_f5xk16bg22vvrf6j00bf00000gn/T/vscode-ipc-51c8b0a0-544c-4a12-8865-7d2b19fca5e7.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/ff/26_f5xk16bg22vvrf6j00bf00000gn/T/vscode-ipc-dea912a8-0da3-4b29-8b67-7d7420c6d84a.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -103,6 +103,7 @@ SHLVL = 1
 # default
 MAKE_VERSION := 3.81
 # environment
+ 
 USER = seitaro
 # makefile
 .DEFAULT_GOAL := postgres
@@ -167,9 +168,9 @@ VSCODE_PID = 582
 
 # Directories
 
-# . (device 16777232, inode 15753083): 10 files, no impossibilities.
+# . (device 16777232, inode 15753083): 15 files, no impossibilities.
 
-# 10 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -195,7 +196,7 @@ all:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc test
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc test mysql mysql-read server mock
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -205,8 +206,17 @@ sqlc:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 17):
+#  commands to execute (from `Makefile', line 23):
 	sqlc generate
+	
+
+mysql-read:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 14):
+	docker exec -it mysql8 mysql -uroot -psecret simple_bank
 	
 
 # Not a target:
@@ -218,19 +228,27 @@ sqlc:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
- 
-#  Last modified 2022-06-21 21:54:40
+#  Last modified 2022-07-05 20:44:47
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+server:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 29):
+	go run main.go
+	
 
 test:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 20):
+#  commands to execute (from `Makefile', line 26):
 	go test -v -cover ./...
 	
 
@@ -239,7 +257,7 @@ createdb:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 5):
+#  commands to execute (from `Makefile', line 8):
 	docker exec -it postgres12 createdb --username=root --owner=root simple_bank
 	
 
@@ -254,7 +272,7 @@ dropdb:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 8):
+#  commands to execute (from `Makefile', line 11):
 	docker exec -it postgres12 dropdb simple_bank
 	
 
@@ -263,8 +281,17 @@ migrateup:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 11):
+#  commands to execute (from `Makefile', line 17):
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose up
+	
+
+mysql:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 5):
+	docker run --name mysql8 -p 3306:3306 --platform linux/amd64 -e MYSQL_ROOT_PASSWORD=secret -d mysql:8
 	
 
 migratedown:
@@ -272,12 +299,21 @@ migratedown:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 14):
+#  commands to execute (from `Makefile', line 20):
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose down
 	
 
+mock:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 32):
+	mockgen -package mockdb -destination db/mock/store.go github.com/pyotarou/simplebank/db/sqlc Store
+	
+
 # files hash-table stats:
-# Load=12/1024=1%, Rehash=0, Collisions=0/31=0%
+# Load=16/1024=2%, Rehash=0, Collisions=0/39=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -289,6 +325,6 @@ migratedown:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Jun 24 19:53:51 2022
+# Finished Make data base on Tue Jul  5 21:33:08 2022
 
  
