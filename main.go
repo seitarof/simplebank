@@ -1,8 +1,12 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 
 	_ "github.com/lib/pq"
 	"github.com/pyotarou/simplebank/api"
@@ -26,8 +30,14 @@ func main() {
 		log.Fatal("cannot create server: ", err)
 	}
 
-	err = server.Start(config.ServerAddress)
-	if err != nil {
-		log.Fatal("cannot start server:", err)
-	}
+	ctx, _ := signal.NotifyContext(context.Background(), syscall.SIGTERM, os.Interrupt, os.Kill)
+
+	go func() {
+		err = server.Start(config.ServerAddress)
+		if err != nil {
+			log.Fatal("cannot start server:", err)
+		}
+	}()
+
+	<-ctx.Done()
 }
