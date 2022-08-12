@@ -168,12 +168,12 @@ func (server *Server) loginUser(ctx *gin.Context) {
 	}
 
 	resp := loginUserResponse{
+		User:                  newUserResponse(user),
 		SessionID:             session.ID,
 		AccessToken:           accessToken,
-		AccessTokenExpiresAt:  accessPayload.ExpiredAt,
 		RefreshToken:          refreshToken,
+		AccessTokenExpiresAt:  accessPayload.ExpiredAt,
 		RefreshTokenExpiresAt: refreshPayload.ExpiredAt,
-		User:                  newUserResponse(user),
 	}
 
 	ctx.JSON(http.StatusOK, resp)
