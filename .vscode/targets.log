@@ -7,10 +7,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Thu Jul 28 19:00:03 2022
+# Make data base, printed on Tue Aug  9 10:09:16 2022
 
 # Variables
 
@@ -29,7 +27,7 @@ CURDIR := /Users/seitaro/Documents/udemy/simplebank
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ja","availableLanguages":{"*":"ja"},"_languagePackId":"29207410cd77a70b4b25e4878dda93be.ja","_translationsConfigFile":"/Users/seitaro/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja/tcf.json","_cacheRoot":"/Users/seitaro/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja","_resolvedLanguagePackCoreLocation":"/Users/seitaro/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja/3b889b090b5ad5793f524b5d1d39fda662b96a2a","_corruptedFile":"/Users/seitaro/Library/Application Support/Code/clp/29207410cd77a70b4b25e4878dda93be.ja/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ja","availableLanguages":{"*":"ja"},"_languagePackId":"4c21b062861233a1c11fa44b2144208f.ja","_translationsConfigFile":"/Users/seitaro/Library/Application Support/Code/clp/4c21b062861233a1c11fa44b2144208f.ja/tcf.json","_cacheRoot":"/Users/seitaro/Library/Application Support/Code/clp/4c21b062861233a1c11fa44b2144208f.ja","_resolvedLanguagePackCoreLocation":"/Users/seitaro/Library/Application Support/Code/clp/4c21b062861233a1c11fa44b2144208f.ja/da76f93349a72022ca4670c1b84860304616aaa2","_corruptedFile":"/Users/seitaro/Library/Application Support/Code/clp/4c21b062861233a1c11fa44b2144208f.ja/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
@@ -49,11 +47,13 @@ PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sb
 # environment
 GOPATH = /Users/seitaro/go
 # environment
+LaunchInstanceID = 6C8C49C4-94A2-4EE1-B9F2-19F555135983
+# environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ml5wWE4B1F/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.XRZPDFOHka/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -71,7 +71,7 @@ HOME = /Users/seitaro
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/seitaro/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+VSCODE_CODE_CACHE_PATH = /Users/seitaro/Library/Application Support/Code/CachedData/da76f93349a72022ca4670c1b84860304616aaa2
 # environment
 LOGNAME = seitaro
 # environment
@@ -105,7 +105,7 @@ TMPDIR = /var/folders/ff/26_f5xk16bg22vvrf6j00bf00000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/seitaro/Library/Application Support/Code/1.69.2-main.sock
+VSCODE_IPC_HOOK = /Users/seitaro/Library/Application Support/Code/1.70.0-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -115,7 +115,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.18702219.18702225
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.19642897.19642903
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -134,6 +134,8 @@ MAKEFILES :=
 <F = $(notdir $<)
 # environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186c5
 # automatic
 ^F = $(notdir $^)
 # default
@@ -145,9 +147,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 50331
+VSCODE_PID = 1942
 # variable set hash-table stats:
-# Load=66/1024=6%, Rehash=0, Collisions=2/90=2%
+# Load=68/1024=7%, Rehash=0, Collisions=2/92=2%
 
 # Pattern-specific Variable Values
 
@@ -155,9 +157,9 @@ VSCODE_PID = 50331
 
 # Directories
 
-# . (device 16777232, inode 15753083): 20 files, no impossibilities.
+# . (device 16777232, inode 15753083): 22 files, no impossibilities.
 
-# 20 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -215,7 +217,7 @@ sqlc:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-18 01:12:18
+#  Last modified 2022-08-01 18:54:18
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -293,10 +295,12 @@ migratedown:
 mock:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
+ 
+make: *** No rule to make target `all'.  Stop.
+
 #  File does not exist.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 32):
- 
 	mockgen -package mockdb -destination db/mock/store.go github.com/pyotarou/simplebank/db/sqlc Store
 	
 
@@ -313,6 +317,6 @@ mock:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jul 28 19:00:03 2022
+# Finished Make data base on Tue Aug  9 10:09:16 2022
 
  
