@@ -7,8 +7,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Tue Aug  9 10:09:16 2022
+
+# Make data base, printed on Fri Aug 12 21:05:22 2022
 
 # Variables
 
@@ -93,7 +95,9 @@ MAKE_VERSION := 3.81
 # environment
 USER = seitaro
 # makefile
-.DEFAULT_GOAL := postgres
+.DEFAULT_GOAL := network
+# makefile (from `Makefile', line 1)
+DB_URL = postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -149,7 +153,7 @@ LANG = C
 # environment
 VSCODE_PID = 1942
 # variable set hash-table stats:
-# Load=68/1024=7%, Rehash=0, Collisions=2/92=2%
+# Load=69/1024=7%, Rehash=0, Collisions=2/93=2%
 
 # Pattern-specific Variable Values
 
@@ -157,9 +161,9 @@ VSCODE_PID = 1942
 
 # Directories
 
-# . (device 16777232, inode 15753083): 22 files, no impossibilities.
+# . (device 16777232, inode 15753083): 25 files, no impossibilities.
 
-# 22 files, no impossibilities in 1 directories.
+# 25 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -172,8 +176,16 @@ postgres:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 2):
+#  commands to execute (from `Makefile', line 7):
 	docker run --name postgres12 --network bank-network -p 5432:5432  -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
+	
+
+network:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 4):
+	docker network create bank-network
 	
 
 # Not a target:
@@ -190,11 +202,11 @@ migratedown1:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 20):
-	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose down 1
+#  commands to execute (from `Makefile', line 25):
+	migrate -path db/migration -database "$(DB_URL)" -verbose down 1
 	
 
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock db_docs db_schema
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -204,7 +216,7 @@ sqlc:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 23):
+#  commands to execute (from `Makefile', line 28):
 	sqlc generate
 	
 
@@ -217,7 +229,7 @@ sqlc:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-01 18:54:18
+#  Last modified 2022-08-12 18:24:13
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -228,7 +240,7 @@ server:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 29):
+#  commands to execute (from `Makefile', line 34):
 	go run main.go
 	
 
@@ -237,8 +249,17 @@ test:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 26):
+#  commands to execute (from `Makefile', line 31):
 	go test -v -cover ./...
+	
+
+db_schema:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 43):
+	dbml2sql --postgres -o doc/schema.sql doc/db.dbml
 	
 
 createdb:
@@ -246,7 +267,7 @@ createdb:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 5):
+#  commands to execute (from `Makefile', line 10):
 	docker exec -it postgres12 createdb --username=root --owner=root simple_bank
 	
 
@@ -256,12 +277,21 @@ createdb:
 #  Modification time never checked.
 #  File has not been updated.
 
+db_docs:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 40):
+	dbdocs build doc/db.dbml
+	
+
 dropdb:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 8):
+#  commands to execute (from `Makefile', line 13):
 	docker exec -it postgres12 dropdb simple_bank
 	
 
@@ -270,17 +300,18 @@ migrateup:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 11):
-	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose up
+#  commands to execute (from `Makefile', line 16):
+	migrate -path db/migration -database "$(DB_URL)" -verbose up
 	
 
 migrateup1:
+ 
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 14):
-	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose up 1
+#  commands to execute (from `Makefile', line 19):
+	migrate -path db/migration -database "$(DB_URL)" -verbose up 1
 	
 
 migratedown:
@@ -288,24 +319,21 @@ migratedown:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 17):
-	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose down
+#  commands to execute (from `Makefile', line 22):
+	migrate -path db/migration -database "$(DB_URL)" -verbose down
 	
 
 mock:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
- 
-make: *** No rule to make target `all'.  Stop.
-
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 32):
+#  commands to execute (from `Makefile', line 37):
 	mockgen -package mockdb -destination db/mock/store.go github.com/pyotarou/simplebank/db/sqlc Store
 	
 
 # files hash-table stats:
-# Load=16/1024=2%, Rehash=0, Collisions=0/39=0%
+# Load=19/1024=2%, Rehash=0, Collisions=0/44=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -317,6 +345,6 @@ make: *** No rule to make target `all'.  Stop.
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Aug  9 10:09:16 2022
+# Finished Make data base on Fri Aug 12 21:05:22 2022
 
  
